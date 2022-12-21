@@ -1,6 +1,6 @@
-﻿using BooksLibrary.Data.Common;
+﻿using BooksLibrary.Data.Models.Common;
 
-namespace BooksLibrary.Data.Entities
+namespace BooksLibrary.Data.Models.Entities
 {
     public class User : Person
     {

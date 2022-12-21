@@ -1,8 +1,8 @@
-﻿using BooksLibrary.Data.Common;
-using BooksLibrary.Data.Enums;
+﻿using BooksLibrary.Data.Enums;
+using BooksLibrary.Data.Models.Common;
 using BooksLibrary.Data.Models.Enums;
 
-namespace BooksLibrary.Data.Entities
+namespace BooksLibrary.Data.Models.Entities
 {
     public class Book : BaseEntity
     {
