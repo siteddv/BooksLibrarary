@@ -1,4 +1,4 @@
-﻿namespace BooksLibrary.Data.Enums
+﻿namespace BooksLibrary.Data.Models.Enums
 {
     public enum Language
     {
