@@ -1,4 +1,6 @@
-﻿namespace BooksLibrary.CMD
+﻿using BooksLibrary.Data.Models.Enums;
+
+namespace BooksLibrary.CMD
 {
     public static class ConsoleReader<T>
     {
@@ -16,7 +18,7 @@
                 }
                 catch
                 {
-                    Console.WriteLine("An error while getting value received. Please enter data again");
+                    Console.WriteLine($"An error while getting value received. Please enter {fieldName} again");
                 }
             }
 
@@ -26,11 +28,30 @@
         private static T ReadData(string fieldName)
         {
             if (typeof(string) == typeof(T))
-                return (T)(object)ConsoleHelper.GetStringFromConsole(fieldName);
-            else if (typeof(int) == typeof(T))
+            {
+                string stringValue = ConsoleHelper.GetStringFromConsole(fieldName);
+                object objectValue = (object)stringValue;
+                T value = (T)objectValue;
+
+                return value;
+            }
+
+            if (typeof(int) == typeof(T))
+            {
                 return (T)(object)ConsoleHelper.GetIntFromConsole(fieldName);
-            else
-                return default(T);
+            }
+
+            if (typeof(DateTime) == typeof(T))
+            {
+                return (T)(object)ConsoleHelper.GetDateTimeFromConsole(fieldName);
+            }
+
+            if (typeof(Language) == typeof(T))
+            {
+                return (T)(object)ConsoleHelper.GetLanguageFromConsole(fieldName);
+            }
+            
+            return default(T);
         }
     }
 }
