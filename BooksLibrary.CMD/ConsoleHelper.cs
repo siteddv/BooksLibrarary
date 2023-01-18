@@ -26,19 +26,26 @@ namespace BooksLibrary.CMD
                 .ParseExact(value, ConsoleConstants.DatePattern, null);
         }
 
-        public static Language GetLanguageFromConsole(string fieldName)
+        private static void PrintEnumWithIndexes(Type enumType, int indexDif)
         {
-            string[] enumValues = Enum.GetNames(typeof(Language));
+            string[] enumValues = Enum.GetNames(enumType);
             int i = 0;
             foreach (string enumVal in enumValues)
             {
-                Console.WriteLine($"{i} {enumVal}");
+                Console.WriteLine($"{i + indexDif} {enumVal}");
                 i++;
             }
+        }
 
-            int number = GetIntFromConsole(fieldName);
+        public static int GetEnumNumberFromConsole(string fieldName, Type enumType)
+        {
+            const int indexDif = 1;
+            
+            PrintEnumWithIndexes(enumType, indexDif);
 
-            return (Language)number;
+            int number = GetIntFromConsole(fieldName) - indexDif;
+
+            return number;
         }
     }
 }

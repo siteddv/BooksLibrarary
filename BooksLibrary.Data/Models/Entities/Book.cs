@@ -8,7 +8,7 @@ namespace BooksLibrary.Data.Models.Entities
         public string Name { get; set; }
         public List<Author> Authors { get; set; }
         public string ShortDesc { get; set; }
-        public List<Genre> Genres { get; set; }
+        public Genre Genres { get; set; }
         public Language Language { get; set; }
         public DateTime Released { get; set; }
         public int CountOfAvailable { get; set; }

@@ -28,30 +28,37 @@ namespace BooksLibrary.CMD
         private static T ReadData(string fieldName)
         {
             if (typeof(string) == typeof(T))
-            {
-                string stringValue = ConsoleHelper.GetStringFromConsole(fieldName);
-                object objectValue = (object)stringValue;
-                T value = (T)objectValue;
-
-                return value;
-            }
+                return (T)(object)ConsoleHelper.GetStringFromConsole(fieldName);
 
             if (typeof(int) == typeof(T))
-            {
                 return (T)(object)ConsoleHelper.GetIntFromConsole(fieldName);
-            }
 
             if (typeof(DateTime) == typeof(T))
-            {
                 return (T)(object)ConsoleHelper.GetDateTimeFromConsole(fieldName);
-            }
 
             if (typeof(Language) == typeof(T))
-            {
-                return (T)(object)ConsoleHelper.GetLanguageFromConsole(fieldName);
-            }
-            
+                return (T)(object)GetLanguageFromConsole(fieldName);
+
+            if (typeof(Genre) == typeof(T))
+                return (T)(object)GetGenreFromConsole(fieldName);
+
             return default(T);
+        }
+
+        private static Language GetLanguageFromConsole(string fieldName)
+        {
+            Language language = (Language)ConsoleHelper
+                .GetEnumNumberFromConsole(fieldName, typeof(Language));
+
+            return language;
+        }
+
+        private static Genre GetGenreFromConsole(string fieldName)
+        {
+            Genre genre = (Genre)ConsoleHelper
+                .GetEnumNumberFromConsole(fieldName, typeof(Genre));
+
+            return genre;
         }
     }
 }
