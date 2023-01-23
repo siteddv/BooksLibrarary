@@ -1,15 +1,19 @@
-﻿using BooksLibrary.BL.TempControllers;
+﻿using BooksLibrary.BL.Controllers.Implementations;
+using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
+using BooksLibrary.Data;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
 
-TempBookController bookController = new TempBookController();
+IBookController bookController = new TempBookController();
 
 Console.WriteLine("Hello, World!");
 
-Book book = GetBookFromConsole();
+TempDb.Init();
 
-bookController.AddBook(book);
+//Book book = GetBookFromConsole();
+
+//bookController.Add(book);
 
 List<Book> books = bookController.GetAll();
 
@@ -44,7 +48,6 @@ static Book GetBookFromConsole()
     };
 
     #endregion
-
 
     return book;
 }
