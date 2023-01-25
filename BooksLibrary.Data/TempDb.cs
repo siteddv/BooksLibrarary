@@ -5,15 +5,12 @@ namespace BooksLibrary.Data
 {
     public static class TempDb
     {
-        public static List<Book> Books = new List<Book>();
-        public static List<Author> Authors = new List<Author>();
-
-        public static void Init()
+        public static void Seed()
         {
-            if(Books.Any() || Authors.Any())
+            if (TempTable<Book>.Items.Any() || TempTable<Author>.Items.Any())
                 return;
 
-            Books.Add(new Book()
+            TempTable<Book>.Items.Add(new Book()
             {
                 Name = "White fang",
                 ShortDesc = "Cool book",
@@ -23,7 +20,7 @@ namespace BooksLibrary.Data
                 CountOfAvailable = 100
             });
 
-            Books.Add(new Book()
+            TempTable<Book>.Items.Add(new Book()
             {
                 Name = "Apendi",
                 ShortDesc = "Funny book",
@@ -33,7 +30,7 @@ namespace BooksLibrary.Data
                 CountOfAvailable = 50
             });
 
-            Authors.Add(new Author()
+            TempTable<Author>.Items.Add(new Author()
             {
                 FirstName = "Jack",
                 LastName = "London",

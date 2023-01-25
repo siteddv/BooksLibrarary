@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BooksLibrary.Data.Models;
+using BooksLibrary.Data.Models.Entities;
 
 namespace BooksLibrary.BL.Controllers.Interfaces
 {
-    internal interface IBookAuthorController
+    public interface IBookAuthorController
     {
+        public void Link(List<Book> books, List<Author> authors);
     }
 }

@@ -1,21 +1,24 @@
-﻿using BooksLibrary.BL.Controllers.Implementations;
+﻿using BooksLibrary.BL.Controllers.Implementations.Temp;
 using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
 using BooksLibrary.Data;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
 
-IBookController bookController = new TempBookController();
+TempDb.Seed();
+
+IDBilable<Book> bookController = new TempDBilController<Book>();
+IDBilable<Author> authorController = new TempDBilController<Author>();
 
 Console.WriteLine("Hello, World!");
 
-TempDb.Init();
-
-//Book book = GetBookFromConsole();
-
-//bookController.Add(book);
-
 List<Book> books = bookController.GetAll();
+
+Book book = GetBookFromConsole();
+
+bookController.Add(book);
+
+books = bookController.GetAll();
 
 Console.ReadKey();
 
