@@ -7,7 +7,8 @@ namespace BooksLibrary.Data
     {
         public static void Seed()
         {
-            if (TempTable<Book>.Items.Any() || TempTable<Author>.Items.Any())
+            if (TempTable<Book>.Items.Any() 
+                || TempTable<Author>.Items.Any())
                 return;
 
             TempTable<Book>.Items.Add(new Book()

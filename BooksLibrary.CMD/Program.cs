@@ -9,16 +9,22 @@ TempDb.Seed();
 
 IDBilable<Book> bookController = new TempDBilController<Book>();
 IDBilable<Author> authorController = new TempDBilController<Author>();
+IBookAuthorController bookAuthorController = new BookAuthorController(
+    bookController, authorController);
 
 Console.WriteLine("Hello, World!");
 
 List<Book> books = bookController.GetAll();
+List<Author> authors = authorController.GetAll();
 
-Book book = GetBookFromConsole();
+bookAuthorController.Link(books, authors);
 
-bookController.Add(book);
+List<Book> books1 = bookController.GetAll();
+List<Author> authors1 = authorController.GetAll();
 
-books = bookController.GetAll();
+//Book book = GetBookFromConsole();
+
+//bookController.Add(book);
 
 Console.ReadKey();
 

@@ -3,7 +3,7 @@ using BooksLibrary.Data.Models.Enums;
 
 namespace BooksLibrary.Data.Models.Entities
 {
-    public class Book : BaseEntity
+    public class Book : BaseEntity, ICloneable
     {
         public string Name { get; set; }
         public List<Author> Authors { get; set; }
@@ -13,5 +13,10 @@ namespace BooksLibrary.Data.Models.Entities
         public DateTime Released { get; set; }
         public int CountOfAvailable { get; set; }
         public bool IsAvailable => CountOfAvailable > 0;
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
