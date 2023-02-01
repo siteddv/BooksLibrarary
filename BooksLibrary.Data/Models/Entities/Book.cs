@@ -6,7 +6,6 @@ namespace BooksLibrary.Data.Models.Entities
     public class Book : BaseEntity, ICloneable
     {
         public string Name { get; set; }
-        public List<Author> Authors { get; set; }
         public string ShortDesc { get; set; }
         public Genre Genres { get; set; }
         public Language Language { get; set; }

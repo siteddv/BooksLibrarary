@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Implementations\Temp\BookAuthorController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BooksLibrary.Data\BooksLibrary.Data.csproj" />
   </ItemGroup>
 

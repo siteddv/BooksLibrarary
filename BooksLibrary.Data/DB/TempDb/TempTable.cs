@@ -1,4 +1,4 @@
-﻿namespace BooksLibrary.Data
+﻿namespace BooksLibrary.Data.DB.TempDb
 {
     public static class TempTable<T>
     {

@@ -1,13 +1,13 @@
 ﻿using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
 
-namespace BooksLibrary.Data
+namespace BooksLibrary.Data.DB.TempDb
 {
     public static class TempDb
     {
         public static void Seed()
         {
-            if (TempTable<Book>.Items.Any() 
+            if (TempTable<Book>.Items.Any()
                 || TempTable<Author>.Items.Any())
                 return;
 

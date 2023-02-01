@@ -1,7 +1,7 @@
 ﻿using BooksLibrary.BL.Controllers.Implementations.Temp;
 using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
-using BooksLibrary.Data;
+using BooksLibrary.Data.DB.TempDb;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
 
@@ -9,15 +9,11 @@ TempDb.Seed();
 
 IDBilable<Book> bookController = new TempDBilController<Book>();
 IDBilable<Author> authorController = new TempDBilController<Author>();
-IBookAuthorController bookAuthorController = new BookAuthorController(
-    bookController, authorController);
 
 Console.WriteLine("Hello, World!");
 
 List<Book> books = bookController.GetAll();
 List<Author> authors = authorController.GetAll();
-
-bookAuthorController.Link(books, authors);
 
 List<Book> books1 = bookController.GetAll();
 List<Author> authors1 = authorController.GetAll();
