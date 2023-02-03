@@ -1,6 +1,7 @@
 ﻿using BooksLibrary.BL.Controllers.Implementations.Temp;
 using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
+using BooksLibrary.Data.DB.SqlServer;
 using BooksLibrary.Data.DB.TempDb;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
@@ -17,6 +18,9 @@ List<Author> authors = authorController.GetAll();
 
 List<Book> books1 = bookController.GetAll();
 List<Author> authors1 = authorController.GetAll();
+
+AppDbContext db = new AppDbContext();
+db.Set<Book>().Add(new Book());
 
 //Book book = GetBookFromConsole();
 
