@@ -3,8 +3,10 @@ using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
 using BooksLibrary.Data.DB.SqlServer;
 using BooksLibrary.Data.DB.TempDb;
+using BooksLibrary.Data.Models.Common;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Enums;
+using BooksLibrary.Data.Repositories.Implementations;
 
 TempDb.Seed();
 
@@ -19,8 +21,20 @@ List<Author> authors = authorController.GetAll();
 List<Book> books1 = bookController.GetAll();
 List<Author> authors1 = authorController.GetAll();
 
-AppDbContext db = new AppDbContext();
-db.Set<Book>().Add(new Book());
+using (AppDbContext db = new AppDbContext())
+{
+    Repository<Book> rep = new Repository<Book>(db);
+    Book b = rep.Add(new Book()
+    {
+        Name = "Gagarin",
+        Language = Language.Russian,
+        Genres = Genre.BDSM,
+        ShortDesc = "1234545",
+        Released = DateTime.Now,
+        CountOfAvailable = 5,
+    });
+    int a = 0;
+}
 
 //Book book = GetBookFromConsole();
 
