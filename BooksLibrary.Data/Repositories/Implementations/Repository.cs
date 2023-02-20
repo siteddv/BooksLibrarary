@@ -30,7 +30,13 @@ namespace BooksLibrary.Data.Repositories.Implementations
 
         public void Delete(T item)
         {
-            throw new NotImplementedException();
+            DbSet<T> dbSet = _context.Set<T>();
+
+            if (dbSet == default(DbSet<T>))
+                return;
+
+            dbSet.Remove(item);
+            _context.SaveChanges();
         }
 
         public List<T> GetAll()
@@ -45,12 +51,27 @@ namespace BooksLibrary.Data.Repositories.Implementations
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            DbSet<T> dbSet = _context.Set<T>();
+
+            if (dbSet == default(DbSet<T>))
+                return default(T);
+
+            T item = dbSet
+                .FirstOrDefault(obj => obj.Id == id);
+
+            return item;
         }
 
-        public void Update(T oldItem, T newItem)
+        public void Update(T item)
         {
-            throw new NotImplementedException();
+            DbSet<T> dbSet = _context.Set<T>();
+
+            if (dbSet == default(DbSet<T>))
+                return;
+
+            dbSet.Update(item);
+
+            _context.SaveChanges();
         }
     }
 }
