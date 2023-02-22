@@ -1,82 +1,68 @@
-﻿//using BooksLibrary.BL.Controllers.Implementations.Temp;
-//using BooksLibrary.BL.Controllers.Interfaces;
-//using BooksLibrary.CMD;
-//using BooksLibrary.Data.DB.SqlServer;
-//using BooksLibrary.Data.DB.TempDb;
-//using BooksLibrary.Data.Models.Common;
-//using BooksLibrary.Data.Models.Entities;
-//using BooksLibrary.Data.Models.Enums;
-//using BooksLibrary.Data.Repositories.Implementations;
+﻿using BooksLibrary.BL.Controllers.Implementations;
+using BooksLibrary.BL.Controllers.Implementations.Temp;
+using BooksLibrary.BL.Controllers.Interfaces;
+using BooksLibrary.CMD;
+using BooksLibrary.Data.DB.SqlServer;
+using BooksLibrary.Data.Models.Entities;
+using BooksLibrary.Data.Models.Enums;
+using BooksLibrary.Data.Models.Relations;
+using BooksLibrary.Data.Repositories.Implementations;
 
-//TempDb.Seed();
+using (AppDbContext db = new AppDbContext())
+{
+    db.Seed();
 
-//IDBilable<Book> bookController = new TempDBilController<Book>();
-//IDBilable<Author> authorController = new TempDBilController<Author>();
+    Repository<Author> authorRepos = new Repository<Author>(db);
+    Repository<Book> bookRepos = new Repository<Book>(db);
+    Repository<BookAuthor> bookAuthRepos= new Repository<BookAuthor>(db);
 
-//Console.WriteLine("Hello, World!");
+    List<Book> books = bookRepos.GetAll();
+    List<Author> authors = authorRepos.GetAll();
 
-//List<Book> books = bookController.GetAll();
-//List<Author> authors = authorController.GetAll();
+    BookAuthorController baController = new BookAuthorController(bookAuthRepos);
 
-//List<Book> books1 = bookController.GetAll();
-//List<Author> authors1 = authorController.GetAll();
+    baController.Link(authors, books);
 
-//using (AppDbContext db = new AppDbContext())
-//{
-//    Repository<Book> rep = new Repository<Book>(db);
-//    Book b = rep.Add(new Book()
-//    {
-//        Name = "Gagarin",
-//        Language = Language.Russian,
-//        Genres = Genre.BDSM,
-//        ShortDesc = "1234545",
-//        Released = DateTime.Now,
-//        CountOfAvailable = 5,
-//    });
-//    int a = 0;
-//}
+    List<BookAuthor> bas = bookAuthRepos.GetAll();
+}
 
-////Book book = GetBookFromConsole();
 
-////bookController.Add(book);
 
-//Console.ReadKey();
+//Book book = GetBookFromConsole();
 
-//static Book GetBookFromConsole()
-//{
-//    Console.WriteLine("Let\'s create a book!");
+//bookController.Add(book);
 
-//    #region Get book data
+Console.ReadKey();
 
-//    string bookName = ConsoleReader<string>.Read("book name");
-//    string shortDesc = ConsoleReader<string>.Read("short description");
-//    DateTime releasedDate = ConsoleReader<DateTime>
-//        .Read($"release date in format {ConsoleConstants.DatePattern}");
-//    Language lang = ConsoleReader<Language>.Read("language number");
-//    Genre genre = ConsoleReader<Genre>.Read("genre number");
-//    int countOfAvailable = ConsoleReader<int>.Read("books count");
+static Book GetBookFromConsole()
+{
+    Console.WriteLine("Let\'s create a book!");
 
-//    #endregion
+    #region Get book data
 
-//    #region Create new book
+    string bookName = ConsoleReader<string>.Read("book name");
+    string shortDesc = ConsoleReader<string>.Read("short description");
+    DateTime releasedDate = ConsoleReader<DateTime>
+        .Read($"release date in format {ConsoleConstants.DatePattern}");
+    Language lang = ConsoleReader<Language>.Read("language number");
+    Genre genre = ConsoleReader<Genre>.Read("genre number");
+    int countOfAvailable = ConsoleReader<int>.Read("books count");
 
-//    Book book = new Book()
-//    {
-//        Name = bookName,
-//        ShortDesc = shortDesc,
-//        Released = releasedDate,
-//        Language = lang,
-//        Genres = genre,
-//        CountOfAvailable = countOfAvailable
-//    };
+    #endregion
 
-//    #endregion
+    #region Create new book
 
-//    return book;
-//}
+    Book book = new Book()
+    {
+        Name = bookName,
+        ShortDesc = shortDesc,
+        Released = releasedDate,
+        Language = lang,
+        Genres = genre,
+        CountOfAvailable = countOfAvailable
+    };
 
-//using System.Text;
+    #endregion
 
-//string str = string.Join(',', "Ayub", "Igor", "Meruert", "Emil");
-
-//Console.WriteLine(str);
+    return book;
+}

@@ -28,6 +28,25 @@ namespace BooksLibrary.Data.Repositories.Implementations
             return result;
         }
 
+        public List<T> AddAll(IEnumerable<T> items)
+        {
+            List<T> result = new List<T>();
+
+            DbSet<T> dbSet = _context.Set<T>();
+
+            if (dbSet == default(DbSet<T>))
+                return default(List<T>);
+
+            foreach(T item in items)
+            {
+                T entity = dbSet.Add(item).Entity;
+                result.Add(entity);
+            }
+
+            _context.SaveChanges();
+            return result;
+        }
+
         public void Delete(T item)
         {
             DbSet<T> dbSet = _context.Set<T>();
