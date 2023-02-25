@@ -15,17 +15,20 @@ namespace BooksLibrary.BL.Controllers.Implementations
 
         public void Link(List<Author> authors, List<Book> books) 
         { 
+            List<BookAuthor> bookAuthors = new List<BookAuthor>();
             foreach(Author author in authors)
             {
                 foreach(Book book in books)
                 {
-                    _repository.Add(new BookAuthor()
+                    bookAuthors.Add(new BookAuthor()
                     {
                         BookId = book.Id,
                         AuthorId = author.Id
                     });
                 }
             }
+
+            _repository.AddAll(bookAuthors);
         }
 
         public void Link(Author author, List<Book> books)

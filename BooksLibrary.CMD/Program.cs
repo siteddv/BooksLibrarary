@@ -1,6 +1,4 @@
 ﻿using BooksLibrary.BL.Controllers.Implementations;
-using BooksLibrary.BL.Controllers.Implementations.Temp;
-using BooksLibrary.BL.Controllers.Interfaces;
 using BooksLibrary.CMD;
 using BooksLibrary.Data.DB.SqlServer;
 using BooksLibrary.Data.Models.Entities;
@@ -13,7 +11,7 @@ using (AppDbContext db = new AppDbContext())
     db.Seed();
 
     Repository<Author> authorRepos = new Repository<Author>(db);
-    Repository<Book> bookRepos = new Repository<Book>(db);
+    BookRepository bookRepos = new BookRepository(db);
     Repository<BookAuthor> bookAuthRepos= new Repository<BookAuthor>(db);
 
     List<Book> books = bookRepos.GetAll();
@@ -21,9 +19,18 @@ using (AppDbContext db = new AppDbContext())
 
     BookAuthorController baController = new BookAuthorController(bookAuthRepos);
 
-    baController.Link(authors, books);
+    Book firstBook = books.FirstOrDefault();
 
+    if(firstBook != null)
+    {
+        var a = bookRepos.GetAuthorsByBookId(firstBook.Id);
+    }
+
+    baController.Link(authors, books);
+    db.Dispose();
     List<BookAuthor> bas = bookAuthRepos.GetAll();
+
+
 }
 
 
