@@ -3,6 +3,8 @@ using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Models.Relations;
 using BooksLibrary.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using System.Net;
 
 namespace BooksLibrary.Data.Repositories.Implementations
 {
@@ -33,6 +35,40 @@ namespace BooksLibrary.Data.Repositories.Implementations
                     .ToList();
 
             return authors;
+        }
+
+        private List<BookAuthor> GetBookAuthors(DbSet<BookAuthor> bookAuthors, int bookId)
+        {
+            List<BookAuthor> result = new List<BookAuthor>();
+
+            foreach(BookAuthor bookAuthor in bookAuthors)
+            {
+                if(bookAuthor.BookId == bookId)
+                {
+                    result.Add(bookAuthor);
+                }
+            }
+
+            return result;
+        }
+
+        public List<Author> GetAuthors(DbSet<Author> authorsDbSet, 
+            IEnumerable<BookAuthor> bookAuthors)
+        {
+            List<Author> result = new List<Author>();
+
+            foreach (Author author in authorsDbSet)
+            {
+                foreach (BookAuthor bookAuthor in bookAuthors)
+                {
+                    if(bookAuthor.AuthorId == author.Id)
+                    {
+                        result.Add(author);
+                        break;
+                    }
+                }
+            }
+            return result;
         }
     }
 }
