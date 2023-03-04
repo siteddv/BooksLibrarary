@@ -11,8 +11,8 @@ using (AppDbContext db = new AppDbContext())
     db.Seed();
 
     Repository<Author> authorRepos = new Repository<Author>(db);
-    BookRepository bookRepos = new BookRepository(db);
-    Repository<BookAuthor> bookAuthRepos= new Repository<BookAuthor>(db);
+    EFBookRepository bookRepos = new EFBookRepository(db);
+    Repository<BookAuthor> bookAuthRepos = new Repository<BookAuthor>(db);
 
     List<Book> books = bookRepos.GetAll();
     List<Author> authors = authorRepos.GetAll();
@@ -20,20 +20,13 @@ using (AppDbContext db = new AppDbContext())
     BookAuthorController baController = new BookAuthorController(bookAuthRepos);
 
     Book firstBook = books.FirstOrDefault();
+    List<BookAuthor> bas = bookAuthRepos.GetAll();
 
-    if(firstBook != null)
+    if (firstBook != null)
     {
         var a = bookRepos.GetAuthorsByBookId(firstBook.Id);
     }
-
-    baController.Link(authors, books);
-    db.Dispose();
-    List<BookAuthor> bas = bookAuthRepos.GetAll();
-
-
 }
-
-
 
 //Book book = GetBookFromConsole();
 

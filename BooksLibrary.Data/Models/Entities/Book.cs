@@ -1,5 +1,6 @@
 ﻿using BooksLibrary.Data.Models.Common;
 using BooksLibrary.Data.Models.Enums;
+using BooksLibrary.Data.Models.Relations;
 
 namespace BooksLibrary.Data.Models.Entities
 {
@@ -12,6 +13,7 @@ namespace BooksLibrary.Data.Models.Entities
         public DateTime Released { get; set; }
         public int CountOfAvailable { get; set; }
         public bool IsAvailable => CountOfAvailable > 0;
+        public List<BookAuthor> BookAuthors { get; set; }
 
         public object Clone()
         {
