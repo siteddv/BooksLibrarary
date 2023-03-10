@@ -2,7 +2,6 @@ using BooksLibrary.Data.DB.SqlServer;
 using BooksLibrary.Data.Models.Entities;
 using BooksLibrary.Data.Repositories.Implementations;
 using BooksLibrary.Data.Repositories.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
