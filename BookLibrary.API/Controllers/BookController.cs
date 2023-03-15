@@ -8,7 +8,7 @@ namespace BookLibrary.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BookController
+    public class BookController : ControllerBase
     {
         private readonly IRepository<Book> _bookRepository;
 
